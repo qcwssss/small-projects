@@ -82,6 +82,6 @@ if __name__ == "__main__":
     print_board(board)
     solve(board)
     print(" ")
-    print("________________________________")
+    print(" ")
     print_board(board)
         
