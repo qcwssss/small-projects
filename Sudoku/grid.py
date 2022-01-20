@@ -1,8 +1,6 @@
 # Sudoku GUI
 import pygame
-import time
 
-# from GUI import Cube
 from solver import find_empty, solve, valid
 from cube import *
 pygame.font.init()
@@ -95,5 +93,40 @@ class Grid:
         else:
             return None
 
+    def is_finished(self):
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.cubes[i][j].value == 0:
+                    return False
+
     def solve(self):
         solve(self.model)
+
+    def solve_gui(self):
+        self.update_model()
+        find = find_empty(self.model)
+        if not find:
+            return True
+        else:
+            row, col = find
+        
+        for i in range(1, 10):
+            if valid(self.model, i, (row, col)):
+                self.model[row][col] = i
+                self.cubes[row][col].set(i)
+                self.cubes[row][col].draw_change(self.win, True)
+                self.update_model()
+                pygame.display.update()
+                pygame.time.delay(100)
+
+                if self.solve_gui():
+                    return True
+                
+                self.model[row][col] = 0
+                self.cubes[row][col].set(0)
+                self.update_model()
+                self.cubes[row][col].draw_change(self.win, False)
+                pygame.display.update()
+                pygame.time.delay(100)
+        
+        return False

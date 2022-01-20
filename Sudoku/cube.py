@@ -31,7 +31,7 @@ class Cube:
             pygame.draw.rect(win, (255, 0, 0), (x, y, gap, gap), 3)
         
     def draw_change(self, win, g=True):
-        fnt = pygame.font.SysFont("comcsans, 40")
+        fnt = pygame.font.SysFont("comcsans", 40)
 
         gap = self.width / 9
         x = self.col * gap
