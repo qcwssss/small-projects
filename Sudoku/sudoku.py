@@ -9,7 +9,7 @@ def redraw_window(win, board, time, strikes):
     text = fnt.render("Time: " + format_time(time), 1, (0,0,0))
     win.blit(text, (540 - 160, 560))
     # Draw Strikes
-    text = fnt.render("X " * strikes, 1, (255, 0, 0))
+    text = fnt.render("X: " + str(strikes), 1, (255, 0, 0))
     win.blit(text, (20, 560))
     # Draw grid and board
     board.draw()
@@ -109,6 +109,6 @@ def main():
         redraw_window(win, board, play_time, strikes)
         pygame.display.update()
 
-
-main()
-pygame.quit()
+if __name__ =="__main__":
+    main()  
+    pygame.quit()
